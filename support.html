@@ -1,0 +1,389 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Rainora technical support">
+  <meta name="theme-color" content="#101d2d">
+  <title>Rainora · Technical Support</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #0b1522;
+      --panel: rgba(19, 37, 55, .78);
+      --text: #edf7f6;
+      --muted: #a9c1c2;
+      --line: rgba(185, 224, 218, .16);
+      --accent: #91ddd0;
+      --accent-strong: #b7f1e5;
+      --shadow: 0 24px 80px rgba(0, 0, 0, .28);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      min-width: 320px;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 12% 0%, rgba(70, 137, 151, .28), transparent 34rem),
+        radial-gradient(circle at 92% 18%, rgba(69, 111, 143, .2), transparent 28rem),
+        linear-gradient(145deg, #0b1522 0%, #10283a 52%, #0b1725 100%);
+      font: 16px/1.7 -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, "Noto Sans", "Helvetica Neue", Arial, sans-serif;
+    }
+    a { color: var(--accent-strong); }
+    a:hover { color: #fff; }
+    .wrap { width: min(1080px, calc(100% - 40px)); margin: 0 auto; }
+
+    header { padding: 22px 0 86px; border-bottom: 1px solid var(--line); }
+    nav { display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+    .brand {
+      display: inline-flex; align-items: center; gap: 11px; color: var(--text);
+      font-size: 20px; font-weight: 700; letter-spacing: .02em; text-decoration: none;
+    }
+    .brand-mark {
+      display: grid; width: 38px; height: 38px; place-items: center;
+      border: 1px solid rgba(183, 241, 229, .42); border-radius: 13px;
+      color: #0e2732; background: linear-gradient(145deg, var(--accent-strong), #65b9c0);
+      box-shadow: 0 8px 24px rgba(87, 199, 194, .18); font-size: 19px;
+    }
+    .lang { display: inline-flex; padding: 4px; border: 1px solid var(--line); border-radius: 999px; background: rgba(10, 24, 36, .48); }
+    .lang button {
+      border: 0; border-radius: 999px; padding: 7px 11px; color: var(--muted);
+      background: transparent; cursor: pointer; font: inherit; font-size: 13px;
+    }
+    .lang button[aria-pressed="true"] { color: #09212b; background: var(--accent); }
+
+    .hero { max-width: 760px; padding-top: 74px; }
+    .eyebrow { margin: 0 0 13px; color: var(--accent); font-size: 13px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
+    h1, h2, h3 { line-height: 1.2; }
+    h1 { max-width: 740px; margin: 0; font-size: clamp(38px, 7vw, 70px); letter-spacing: -.045em; }
+    .hero p { max-width: 650px; margin: 22px 0 0; color: var(--muted); font-size: clamp(17px, 2vw, 20px); }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 30px; }
+    .button {
+      display: inline-flex; align-items: center; justify-content: center; min-height: 46px;
+      padding: 10px 18px; border: 1px solid rgba(183, 241, 229, .42); border-radius: 12px;
+      color: #08212a; background: var(--accent); font-weight: 700; text-decoration: none;
+    }
+    .button.secondary { color: var(--text); background: rgba(255, 255, 255, .05); border-color: var(--line); }
+    .button:hover { color: #061b23; background: #c9fff4; text-decoration: none; }
+    .button.secondary:hover { color: #fff; background: rgba(255, 255, 255, .11); }
+
+    main { padding: 58px 0 78px; }
+    .section { margin-top: 58px; }
+    .section:first-child { margin-top: 0; }
+    .section-heading { max-width: 700px; margin-bottom: 22px; }
+    h2 { margin: 0 0 10px; font-size: clamp(27px, 4vw, 38px); letter-spacing: -.025em; }
+    .section-heading p { margin: 0; color: var(--muted); }
+    .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; }
+    .card { padding: 23px; border: 1px solid var(--line); border-radius: 18px; background: var(--panel); box-shadow: var(--shadow); }
+    .card h3 { margin: 0 0 9px; font-size: 18px; }
+    .card p { margin: 0; color: var(--muted); }
+    .icon { margin-bottom: 12px; color: var(--accent); font-size: 25px; }
+
+    .faq { display: grid; gap: 11px; }
+    details { border: 1px solid var(--line); border-radius: 14px; background: rgba(19, 37, 55, .64); }
+    summary { padding: 17px 20px; cursor: pointer; list-style: none; font-weight: 700; }
+    summary::-webkit-details-marker { display: none; }
+    summary::after { float: right; color: var(--accent); content: "+"; font-size: 21px; line-height: 1; }
+    details[open] summary::after { content: "−"; }
+    details p { margin: 0; padding: 0 20px 19px; color: var(--muted); }
+
+    .contact { display: grid; grid-template-columns: 1.2fr .8fr; gap: 20px; align-items: stretch; }
+    .contact-main {
+      padding: 30px; border: 1px solid rgba(145, 221, 208, .25); border-radius: 22px;
+      background: linear-gradient(135deg, rgba(36, 77, 91, .82), rgba(20, 43, 60, .86));
+    }
+    .contact-main h2 { margin-bottom: 13px; }
+    .contact-main p { max-width: 620px; margin: 0 0 20px; color: var(--muted); }
+    .email { display: inline-block; padding: 11px 15px; border-radius: 11px; color: var(--accent-strong); background: rgba(5, 20, 29, .38); font-weight: 700; text-decoration: none; }
+    .contact-note { padding: 26px; border: 1px solid var(--line); border-radius: 22px; background: var(--panel); }
+    .contact-note h3 { margin-top: 0; }
+    .contact-note p { margin-bottom: 0; color: var(--muted); }
+    footer { padding: 25px 0 35px; border-top: 1px solid var(--line); color: var(--muted); font-size: 13px; }
+    footer p { margin: 0; }
+
+    @media (max-width: 760px) {
+      .wrap { width: min(100% - 28px, 620px); }
+      header { padding-bottom: 60px; }
+      .hero { padding-top: 58px; }
+      .grid, .contact { grid-template-columns: 1fr; }
+      .card, .contact-main, .contact-note { padding: 20px; }
+      .lang { max-width: 62vw; overflow-x: auto; }
+      .lang button { flex: 0 0 auto; }
+    }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <nav aria-label="Primary navigation">
+        <a class="brand" href="#top" aria-label="Rainora home"><span class="brand-mark" aria-hidden="true">☾</span><span>Rainora</span></a>
+        <div class="lang" aria-label="Language selector">
+          <button type="button" data-language="en" aria-pressed="true">EN</button>
+          <button type="button" data-language="zh" aria-pressed="false">中文</button>
+          <button type="button" data-language="ja" aria-pressed="false">日本語</button>
+          <button type="button" data-language="ko" aria-pressed="false">한국어</button>
+          <button type="button" data-language="de" aria-pressed="false">DE</button>
+          <button type="button" data-language="es" aria-pressed="false">ES</button>
+          <button type="button" data-language="fr" aria-pressed="false">FR</button>
+          <button type="button" data-language="pt" aria-pressed="false">PT</button>
+        </div>
+      </nav>
+      <div class="hero" id="top">
+        <p class="eyebrow" data-text="eyebrow"></p>
+        <h1 data-text="heroTitle"></h1>
+        <p data-text="heroText"></p>
+        <div class="hero-actions">
+          <a class="button" href="#contact" data-text="contactButton"></a>
+          <a class="button secondary" href="#faq" data-text="faqButton"></a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="section" aria-labelledby="help-title">
+      <div class="section-heading">
+        <h2 id="help-title" data-text="helpTitle"></h2>
+        <p data-text="helpText"></p>
+      </div>
+      <div class="grid">
+        <article class="card"><div class="icon" aria-hidden="true">◌</div><h3 data-text="cards.0.title"></h3><p data-text="cards.0.text"></p></article>
+        <article class="card"><div class="icon" aria-hidden="true">◷</div><h3 data-text="cards.1.title"></h3><p data-text="cards.1.text"></p></article>
+        <article class="card"><div class="icon" aria-hidden="true">✦</div><h3 data-text="cards.2.title"></h3><p data-text="cards.2.text"></p></article>
+      </div>
+    </section>
+
+    <section class="section" id="faq" aria-labelledby="faq-title">
+      <div class="section-heading"><h2 id="faq-title" data-text="faqTitle"></h2><p data-text="faqText"></p></div>
+      <div class="faq">
+        <details><summary data-text="faq.0.q"></summary><p data-text="faq.0.a"></p></details>
+        <details><summary data-text="faq.1.q"></summary><p data-text="faq.1.a"></p></details>
+        <details><summary data-text="faq.2.q"></summary><p data-text="faq.2.a"></p></details>
+        <details><summary data-text="faq.3.q"></summary><p data-text="faq.3.a"></p></details>
+        <details><summary data-text="faq.4.q"></summary><p data-text="faq.4.a"></p></details>
+        <details><summary data-text="faq.5.q"></summary><p data-text="faq.5.a"></p></details>
+      </div>
+    </section>
+
+    <section class="section" id="contact" aria-labelledby="contact-title">
+      <div class="contact">
+        <div class="contact-main">
+          <h2 id="contact-title" data-text="contactTitle"></h2>
+          <p data-text="contactText"></p>
+          <a class="email" id="emailLink" href="mailto:jsonlees121@gmail.com">jsonlees121@gmail.com</a>
+        </div>
+        <aside class="contact-note"><h3 data-text="includeTitle"></h3><p data-html="includeText"></p></aside>
+      </div>
+    </section>
+  </main>
+
+  <footer><div class="wrap"><p data-text="footer"></p></div></footer>
+
+  <script>
+    const EMAIL = 'jsonlees121@gmail.com';
+    const languages = ['en', 'zh', 'ja', 'ko', 'de', 'es', 'fr', 'pt'];
+    const copy = {
+      en: {
+        htmlLang: 'en', title: 'Rainora · Technical Support', eyebrow: 'Rainora · Support',
+        heroTitle: 'Sleep deeper. Wake calmer.', heroText: 'Help with soundscapes, sleep timers, alarms, playback, subscriptions, and custom scenes.',
+        contactButton: 'Contact support', faqButton: 'Read FAQs', helpTitle: 'How can we help?', helpText: 'Rainora is a calming soundscape app for sleep, focus, rest, and quiet moments.',
+        cards: [
+          { title: 'Sound & scenes', text: 'Mix rain, nature sounds, background music, and immersive visual scenes. Adjust every layer independently.' },
+          { title: 'Sleep & alarms', text: 'Use Sleep Timer, Sleep Mode, repeating alarms, voice reminders, and a 10-minute snooze.' },
+          { title: 'Premium & purchases', text: 'Premium unlocks all scenes, unlimited custom mixes, voice alarms, Family Sharing, and an ad-free experience.' }
+        ],
+        faqTitle: 'Frequently asked questions', faqText: 'Try these steps first. If the issue continues, contact us with the details below.',
+        faq: [
+          { q: 'Why did playback stop when I locked my device?', a: 'Make sure Rainora is allowed to run in the background, your device is not in Low Power Mode, and the volume is turned up. Reopen the app once after changing system settings.' },
+          { q: 'How do I restore my Premium purchase?', a: 'Open Rainora\'s Premium screen and choose “Restore Purchases”. Use the same Apple ID that made the original purchase. Restoring does not create a second charge.' },
+          { q: 'My alarm did not play. What should I check?', a: 'Check that the alarm is enabled, its time and repeat days are correct, notification permissions are allowed, and your device is not muted or in a focus mode that silences alerts.' },
+          { q: 'Can I use Rainora without an account?', a: 'Yes. No account is required to get started. Purchases and subscriptions are handled securely through the App Store.' },
+          { q: 'Why is a scene image or video unavailable?', a: 'Some media is downloaded or cached when needed. Check your internet connection and device storage, then try opening the scene again. Audio can continue without video in Power Save mode.' },
+          { q: 'How do I report a bug or request a feature?', a: 'Email us using the address below. Include your device model, iOS version, Rainora version, a short description, and steps to reproduce the issue. Do not include passwords or payment details.' }
+        ],
+        contactTitle: 'Still need help?', contactText: 'We are happy to help. Send us a message and we will look into it as soon as possible.', includeTitle: 'Please include', includeText: 'Device model<br>iOS version<br>Rainora version<br>What happened and how to reproduce it', footer: '© 2026 Rainora. Rainora supports relaxation and better routines; it is not a medical treatment.'
+      },
+      zh: {
+        htmlLang: 'zh-CN', title: 'Rainora · 技术支持', eyebrow: 'Rainora · 技术支持',
+        heroTitle: '深度入睡，宁静醒来。', heroText: '获取声音场景、睡眠定时、闹钟、播放、订阅和自定义场景的帮助。',
+        contactButton: '联系技术支持', faqButton: '查看常见问题', helpTitle: '你可以获得哪些帮助？', helpText: 'Rainora 是一款适合睡眠、专注、休息和安静时刻的声音场景应用。',
+        cards: [
+          { title: '声音与场景', text: '混合雨声、自然声音、背景音乐和沉浸式画面，并单独调节每一层声音的音量。' },
+          { title: '睡眠与闹钟', text: '使用睡眠定时、睡眠模式、重复闹钟、语音提醒和 10 分钟稍后提醒。' },
+          { title: 'Premium 与购买', text: 'Premium 可解锁全部场景、无限自定义混音、语音闹钟、家庭共享和无广告体验。' }
+        ],
+        faqTitle: '常见问题', faqText: '可以先尝试以下方法。如果问题仍然存在，请附上文末所列信息联系我们。',
+        faq: [
+          { q: '锁屏后为什么停止播放？', a: '请确认 Rainora 允许后台运行，设备没有开启低电量模式，并且系统音量已打开。修改系统设置后，请重新打开一次应用。' },
+          { q: '如何恢复 Premium 购买？', a: '打开 Rainora 的 Premium 页面并选择“恢复购买”。请使用原购买所用的 Apple ID。恢复购买不会产生第二次扣费。' },
+          { q: '闹钟没有响，应该检查什么？', a: '请确认闹钟已启用，时间和重复日期正确，通知权限已允许，并且设备没有静音或使用会屏蔽提醒的专注模式。' },
+          { q: '不注册账号可以使用 Rainora 吗？', a: '可以。开始使用 Rainora 不需要注册账号。购买和订阅由 App Store 安全处理。' },
+          { q: '为什么场景图片或视频无法加载？', a: '部分媒体会在需要时下载或缓存。请检查网络连接，确认设备有足够存储空间，然后重新打开场景。在省电模式下，即使没有视频也可以继续播放声音。' },
+          { q: '如何反馈问题或提出功能建议？', a: '请使用下方邮箱联系我们，并附上设备型号、iOS 版本、Rainora 版本、问题简述和复现步骤。请不要发送密码或支付信息。' }
+        ],
+        contactTitle: '仍然需要帮助？', contactText: '欢迎联系我们，我们会尽快协助你解决问题。', includeTitle: '邮件中请附上', includeText: '设备型号<br>iOS 版本<br>Rainora 版本<br>问题现象与复现步骤', footer: '© 2026 Rainora。Rainora 用于辅助放松和建立更好的生活习惯，不是医疗服务。'
+      },
+      ja: {
+        htmlLang: 'ja', title: 'Rainora · サポート', eyebrow: 'Rainora · サポート',
+        heroTitle: '深く眠り、穏やかに目覚める。', heroText: 'サウンドスケープ、スリープタイマー、アラーム、再生、サブスクリプション、カスタムシーンについてご案内します。',
+        contactButton: 'サポートに連絡', faqButton: 'よくある質問', helpTitle: 'どのようなサポートが必要ですか？', helpText: 'Rainora は睡眠、集中、休息、静かな時間のためのサウンドスケープアプリです。',
+        cards: [
+          { title: '音とシーン', text: '雨音、自然音、BGM、映像シーンを重ね、それぞれの音量を個別に調整できます。' },
+          { title: '睡眠とアラーム', text: 'スリープタイマー、スリープモード、繰り返しアラーム、音声リマインダー、10分スヌーズを利用できます。' },
+          { title: 'Premium と購入', text: 'Premium では全シーン、無制限のカスタムミックス、音声アラーム、ファミリー共有、広告なしの体験を利用できます。' }
+        ],
+        faqTitle: 'よくある質問', faqText: 'まずは以下をお試しください。解決しない場合は、下記の情報を添えてご連絡ください。',
+        faq: [
+          { q: '画面をロックすると再生が止まるのはなぜですか？', a: 'Rainora のバックグラウンド実行を許可し、低電力モードをオフにして、端末の音量を確認してください。設定を変更した後はアプリを一度開き直してください。' },
+          { q: 'Premium の購入を復元するには？', a: 'Rainora の Premium 画面で「購入を復元」を選択してください。購入時と同じ Apple ID を使用します。復元によって二重請求されることはありません。' },
+          { q: 'アラームが鳴りません。何を確認すればよいですか？', a: 'アラームが有効か、時刻と繰り返し曜日が正しいか、通知が許可されているか、消音や通知を抑制する集中モードになっていないか確認してください。' },
+          { q: 'アカウントなしで使えますか？', a: 'はい。開始時にアカウント登録は必要ありません。購入とサブスクリプションは App Store を通じて安全に処理されます。' },
+          { q: 'シーンの画像や動画が表示されないのはなぜですか？', a: '一部のメディアは必要に応じてダウンロードまたはキャッシュされます。通信環境と空き容量を確認して、シーンをもう一度開いてください。省電力モードでは動画なしで音声を再生できます。' },
+          { q: 'バグ報告や機能提案をするには？', a: '下記のメールアドレスまでご連絡ください。端末モデル、iOS バージョン、Rainora のバージョン、問題の内容、再現手順を記載してください。パスワードや決済情報は送らないでください。' }
+        ],
+        contactTitle: 'まだ解決しませんか？', contactText: 'お気軽にご連絡ください。できるだけ早く確認します。', includeTitle: 'メールに含めてください', includeText: '端末モデル<br>iOS バージョン<br>Rainora バージョン<br>問題の内容と再現手順', footer: '© 2026 Rainora。Rainora はリラックスや生活習慣をサポートするアプリであり、医療サービスではありません。'
+      },
+      ko: {
+        htmlLang: 'ko', title: 'Rainora · 기술 지원', eyebrow: 'Rainora · 기술 지원',
+        heroTitle: '더 깊이 잠들고, 더 편안하게 깨세요.', heroText: '사운드스케이프, 수면 타이머, 알람, 재생, 구독과 사용자 지정 장면에 대한 도움을 받을 수 있습니다.',
+        contactButton: '지원 문의', faqButton: '자주 묻는 질문', helpTitle: '어떤 도움이 필요하신가요?', helpText: 'Rainora는 수면, 집중, 휴식과 조용한 순간을 위한 사운드스케이프 앱입니다.',
+        cards: [
+          { title: '소리와 장면', text: '빗소리, 자연의 소리, 배경 음악과 몰입형 장면을 겹쳐 재생하고 각 음량을 조절할 수 있습니다.' },
+          { title: '수면과 알람', text: '수면 타이머, 수면 모드, 반복 알람, 음성 알림과 10분 다시 알림을 사용할 수 있습니다.' },
+          { title: 'Premium 및 구매', text: 'Premium은 모든 장면, 무제한 사용자 지정 믹스, 음성 알람, 가족 공유와 광고 없는 경험을 제공합니다.' }
+        ],
+        faqTitle: '자주 묻는 질문', faqText: '먼저 아래 방법을 시도해 보세요. 문제가 계속되면 아래 정보를 포함해 문의해 주세요.',
+        faq: [
+          { q: '기기를 잠그면 재생이 멈추는 이유는 무엇인가요?', a: 'Rainora의 백그라운드 실행을 허용하고, 저전력 모드를 끄고, 기기 음량을 확인하세요. 시스템 설정을 변경한 후 앱을 한 번 다시 열어 주세요.' },
+          { q: 'Premium 구매를 복원하려면 어떻게 하나요?', a: 'Rainora의 Premium 화면에서 “구매 복원”을 선택하세요. 원래 구매에 사용한 Apple ID가 필요합니다. 복원으로 중복 결제되지는 않습니다.' },
+          { q: '알람이 울리지 않았습니다. 무엇을 확인해야 하나요?', a: '알람 활성화 상태, 시간과 반복 요일, 알림 권한을 확인하고 기기가 무음 또는 알림을 막는 집중 모드인지 확인하세요.' },
+          { q: '계정 없이 Rainora를 사용할 수 있나요?', a: '네. 시작할 때 계정이 필요하지 않습니다. 구매와 구독은 App Store에서 안전하게 처리됩니다.' },
+          { q: '장면 이미지나 동영상을 사용할 수 없는 이유는 무엇인가요?', a: '일부 미디어는 필요할 때 다운로드되거나 캐시됩니다. 인터넷 연결과 저장 공간을 확인한 후 장면을 다시 열어 보세요. 절전 모드에서는 동영상 없이 오디오를 재생할 수 있습니다.' },
+          { q: '버그를 신고하거나 기능을 제안하려면 어떻게 하나요?', a: '아래 이메일로 문의해 주세요. 기기 모델, iOS 버전, Rainora 버전, 문제 설명과 재현 단계를 포함해 주세요. 비밀번호나 결제 정보는 보내지 마세요.' }
+        ],
+        contactTitle: '여전히 도움이 필요하신가요?', contactText: '문의해 주시면 가능한 한 빠르게 확인하겠습니다.', includeTitle: '이 정보를 포함해 주세요', includeText: '기기 모델<br>iOS 버전<br>Rainora 버전<br>문제 내용과 재현 단계', footer: '© 2026 Rainora. Rainora는 휴식과 더 나은 생활 습관을 돕기 위한 앱이며 의료 서비스가 아닙니다.'
+      },
+      de: {
+        htmlLang: 'de', title: 'Rainora · Technischer Support', eyebrow: 'Rainora · Support',
+        heroTitle: 'Tiefer schlafen. Ruhiger aufwachen.', heroText: 'Hilfe zu Soundscapes, Schlaftimern, Weckern, Wiedergabe, Abonnements und eigenen Szenen.',
+        contactButton: 'Support kontaktieren', faqButton: 'Häufige Fragen', helpTitle: 'Wie können wir helfen?', helpText: 'Rainora ist eine Soundscape-App für Schlaf, Konzentration, Erholung und ruhige Momente.',
+        cards: [
+          { title: 'Sounds & Szenen', text: 'Kombiniere Regen, Naturklänge, Hintergrundmusik und immersive Szenen. Passe jede Ebene unabhängig an.' },
+          { title: 'Schlaf & Wecker', text: 'Nutze Schlaftimer, Schlafmodus, wiederkehrende Wecker, Spracherinnerungen und 10 Minuten Schlummern.' },
+          { title: 'Premium & Käufe', text: 'Premium schaltet alle Szenen, unbegrenzte eigene Mixe, Sprachwecker, Familienfreigabe und ein werbefreies Erlebnis frei.' }
+        ],
+        faqTitle: 'Häufig gestellte Fragen', faqText: 'Probiere zuerst diese Schritte. Wenn das Problem bleibt, sende uns die unten genannten Informationen.',
+        faq: [
+          { q: 'Warum stoppt die Wiedergabe beim Sperren des Geräts?', a: 'Erlaube Rainora die Hintergrundausführung, deaktiviere den Energiesparmodus und prüfe die Lautstärke. Öffne die App nach Änderungen an den Systemeinstellungen einmal neu.' },
+          { q: 'Wie stelle ich meinen Premium-Kauf wieder her?', a: 'Öffne den Premium-Bildschirm und wähle „Käufe wiederherstellen“. Verwende dieselbe Apple ID wie beim ursprünglichen Kauf. Dadurch entstehen keine zusätzlichen Kosten.' },
+          { q: 'Mein Wecker hat nicht geklingelt. Was soll ich prüfen?', a: 'Prüfe, ob der Wecker aktiviert ist, Uhrzeit und Wiederholung stimmen, Benachrichtigungen erlaubt sind und das Gerät nicht stummgeschaltet ist oder einen Fokusmodus verwendet.' },
+          { q: 'Kann ich Rainora ohne Konto verwenden?', a: 'Ja. Für den Start ist kein Konto erforderlich. Käufe und Abonnements werden sicher über den App Store abgewickelt.' },
+          { q: 'Warum ist ein Szenenbild oder -video nicht verfügbar?', a: 'Einige Medien werden bei Bedarf heruntergeladen oder zwischengespeichert. Prüfe Internetverbindung und Speicherplatz und öffne die Szene erneut. Im Energiesparmodus funktioniert Audio auch ohne Video.' },
+          { q: 'Wie melde ich einen Fehler oder schlage eine Funktion vor?', a: 'Schreibe an die unten angegebene E-Mail-Adresse. Füge Gerätemodell, iOS-Version, Rainora-Version, eine kurze Beschreibung und Reproduktionsschritte hinzu. Keine Passwörter oder Zahlungsdaten senden.' }
+        ],
+        contactTitle: 'Brauchst du noch Hilfe?', contactText: 'Schreibe uns. Wir prüfen dein Anliegen so schnell wie möglich.', includeTitle: 'Bitte angeben', includeText: 'Gerätemodell<br>iOS-Version<br>Rainora-Version<br>Was ist passiert und wie lässt es sich reproduzieren?', footer: '© 2026 Rainora. Rainora unterstützt Entspannung und bessere Routinen und ist keine medizinische Behandlung.'
+      },
+      es: {
+        htmlLang: 'es', title: 'Rainora · Soporte técnico', eyebrow: 'Rainora · Soporte',
+        heroTitle: 'Duerme mejor. Despierta en calma.', heroText: 'Ayuda con paisajes sonoros, temporizadores de sueño, alarmas, reproducción, suscripciones y escenas personalizadas.',
+        contactButton: 'Contactar con soporte', faqButton: 'Preguntas frecuentes', helpTitle: '¿Cómo podemos ayudarte?', helpText: 'Rainora es una app de paisajes sonoros para dormir, concentrarte, descansar y disfrutar de momentos tranquilos.',
+        cards: [
+          { title: 'Sonido y escenas', text: 'Combina lluvia, sonidos de la naturaleza, música de fondo y escenas envolventes. Ajusta cada capa por separado.' },
+          { title: 'Sueño y alarmas', text: 'Usa el temporizador de sueño, el modo sueño, alarmas repetidas, recordatorios de voz y una posposición de 10 minutos.' },
+          { title: 'Premium y compras', text: 'Premium desbloquea todas las escenas, mezclas personalizadas ilimitadas, alarmas de voz, Compartir en familia y una experiencia sin anuncios.' }
+        ],
+        faqTitle: 'Preguntas frecuentes', faqText: 'Prueba primero estos pasos. Si el problema continúa, escríbenos con la información indicada abajo.',
+        faq: [
+          { q: '¿Por qué se detiene la reproducción al bloquear el dispositivo?', a: 'Permite que Rainora funcione en segundo plano, desactiva el modo de bajo consumo y comprueba el volumen. Después de cambiar los ajustes del sistema, vuelve a abrir la app.' },
+          { q: '¿Cómo restauro mi compra Premium?', a: 'Abre la pantalla Premium y elige “Restaurar compras”. Usa el mismo Apple ID de la compra original. La restauración no genera un segundo cobro.' },
+          { q: 'Mi alarma no sonó. ¿Qué debo comprobar?', a: 'Comprueba que la alarma esté activada, que la hora y los días sean correctos, que las notificaciones estén permitidas y que el dispositivo no esté silenciado ni en un modo de concentración.' },
+          { q: '¿Puedo usar Rainora sin una cuenta?', a: 'Sí. No necesitas una cuenta para empezar. Las compras y suscripciones se gestionan de forma segura mediante el App Store.' },
+          { q: '¿Por qué no está disponible una imagen o un vídeo?', a: 'Algunos contenidos se descargan o guardan en caché cuando son necesarios. Comprueba la conexión y el almacenamiento y vuelve a abrir la escena. El modo ahorro permite continuar con solo audio.' },
+          { q: '¿Cómo informo de un error o solicito una función?', a: 'Escríbenos al correo indicado abajo. Incluye el modelo del dispositivo, la versión de iOS, la versión de Rainora, una descripción breve y los pasos para reproducirlo. No envíes contraseñas ni datos de pago.' }
+        ],
+        contactTitle: '¿Sigues necesitando ayuda?', contactText: 'Estaremos encantados de ayudarte. Revisaremos tu mensaje lo antes posible.', includeTitle: 'Incluye estos datos', includeText: 'Modelo del dispositivo<br>Versión de iOS<br>Versión de Rainora<br>Qué ocurrió y cómo reproducirlo', footer: '© 2026 Rainora. Rainora ayuda a relajarte y crear mejores rutinas; no es un tratamiento médico.'
+      },
+      fr: {
+        htmlLang: 'fr', title: 'Rainora · Assistance technique', eyebrow: 'Rainora · Assistance',
+        heroTitle: 'Dormez mieux. Réveillez-vous apaisé.', heroText: 'Aide concernant les paysages sonores, le minuteur de sommeil, les alarmes, la lecture, les abonnements et les scènes personnalisées.',
+        contactButton: 'Contacter l’assistance', faqButton: 'Questions fréquentes', helpTitle: 'Comment pouvons-nous vous aider ?', helpText: 'Rainora est une application de paysages sonores pour dormir, se concentrer, se reposer et profiter de moments calmes.',
+        cards: [
+          { title: 'Sons et scènes', text: 'Combinez pluie, sons de la nature, musique d’ambiance et scènes immersives. Réglez chaque couche séparément.' },
+          { title: 'Sommeil et alarmes', text: 'Utilisez le minuteur de sommeil, le mode sommeil, les alarmes répétées, les rappels vocaux et le report de 10 minutes.' },
+          { title: 'Premium et achats', text: 'Premium débloque toutes les scènes, les mixages personnalisés illimités, les alarmes vocales, le partage familial et une expérience sans publicité.' }
+        ],
+        faqTitle: 'Questions fréquentes', faqText: 'Essayez d’abord ces étapes. Si le problème persiste, contactez-nous avec les informations ci-dessous.',
+        faq: [
+          { q: 'Pourquoi la lecture s’arrête-t-elle lorsque je verrouille mon appareil ?', a: 'Autorisez Rainora à fonctionner en arrière-plan, désactivez le mode économie d’énergie et vérifiez le volume. Après toute modification des réglages système, rouvrez l’application.' },
+          { q: 'Comment restaurer mon achat Premium ?', a: 'Ouvrez l’écran Premium et choisissez « Restaurer les achats ». Utilisez le même identifiant Apple que pour l’achat initial. La restauration ne crée pas de double facturation.' },
+          { q: 'Mon alarme n’a pas sonné. Que dois-je vérifier ?', a: 'Vérifiez que l’alarme est activée, que l’heure et les jours sont corrects, que les notifications sont autorisées et que l’appareil n’est pas en mode silencieux ou Concentration.' },
+          { q: 'Puis-je utiliser Rainora sans compte ?', a: 'Oui. Aucun compte n’est nécessaire pour commencer. Les achats et abonnements sont gérés en toute sécurité par l’App Store.' },
+          { q: 'Pourquoi une image ou une vidéo de scène est-elle indisponible ?', a: 'Certains médias sont téléchargés ou mis en cache lorsque nécessaire. Vérifiez la connexion et l’espace disponible, puis ouvrez à nouveau la scène. Le mode économie d’énergie permet de continuer en audio seul.' },
+          { q: 'Comment signaler un bug ou proposer une fonctionnalité ?', a: 'Écrivez-nous à l’adresse ci-dessous. Indiquez le modèle de l’appareil, la version d’iOS, la version de Rainora, une brève description et les étapes de reproduction. N’envoyez aucun mot de passe ni donnée de paiement.' }
+        ],
+        contactTitle: 'Vous avez encore besoin d’aide ?', contactText: 'Nous sommes là pour vous aider. Nous étudierons votre message dès que possible.', includeTitle: 'Merci d’indiquer', includeText: 'Modèle de l’appareil<br>Version d’iOS<br>Version de Rainora<br>Ce qui s’est passé et comment reproduire le problème', footer: '© 2026 Rainora. Rainora favorise la détente et de meilleures habitudes ; ce n’est pas un traitement médical.'
+      },
+      pt: {
+        htmlLang: 'pt-BR', title: 'Rainora · Suporte técnico', eyebrow: 'Rainora · Suporte',
+        heroTitle: 'Durma melhor. Acorde em paz.', heroText: 'Ajuda com paisagens sonoras, temporizador de sono, alarmes, reprodução, assinaturas e cenas personalizadas.',
+        contactButton: 'Falar com o suporte', faqButton: 'Perguntas frequentes', helpTitle: 'Como podemos ajudar?', helpText: 'Rainora é um app de paisagens sonoras para dormir, se concentrar, descansar e aproveitar momentos tranquilos.',
+        cards: [
+          { title: 'Sons e cenas', text: 'Combine chuva, sons da natureza, música de fundo e cenas imersivas. Ajuste cada camada separadamente.' },
+          { title: 'Sono e alarmes', text: 'Use o temporizador de sono, o modo sono, alarmes recorrentes, lembretes de voz e a soneca de 10 minutos.' },
+          { title: 'Premium e compras', text: 'O Premium desbloqueia todas as cenas, mixes personalizados ilimitados, alarmes de voz, Compartilhamento Familiar e uma experiência sem anúncios.' }
+        ],
+        faqTitle: 'Perguntas frequentes', faqText: 'Primeiro, tente estas etapas. Se o problema continuar, fale conosco com as informações abaixo.',
+        faq: [
+          { q: 'Por que a reprodução parou quando bloqueei o dispositivo?', a: 'Permita que o Rainora funcione em segundo plano, desative o modo de pouca energia e verifique o volume. Depois de alterar os ajustes do sistema, abra o app novamente.' },
+          { q: 'Como restauro minha compra Premium?', a: 'Abra a tela Premium e escolha “Restaurar compras”. Use o mesmo Apple ID da compra original. A restauração não gera uma segunda cobrança.' },
+          { q: 'Meu alarme não tocou. O que devo verificar?', a: 'Verifique se o alarme está ativado, se o horário e os dias estão corretos, se as notificações estão permitidas e se o dispositivo não está no silencioso ou em um modo de concentração.' },
+          { q: 'Posso usar o Rainora sem uma conta?', a: 'Sim. Não é necessário criar uma conta para começar. Compras e assinaturas são processadas com segurança pela App Store.' },
+          { q: 'Por que uma imagem ou vídeo de cena não está disponível?', a: 'Algumas mídias são baixadas ou armazenadas em cache quando necessário. Verifique a conexão e o espaço do dispositivo e abra a cena novamente. O modo de economia de energia permite continuar apenas com áudio.' },
+          { q: 'Como relato um problema ou sugiro um recurso?', a: 'Envie um e-mail para o endereço abaixo. Inclua o modelo do dispositivo, a versão do iOS, a versão do Rainora, uma breve descrição e as etapas para reproduzir o problema. Não envie senhas ou dados de pagamento.' }
+        ],
+        contactTitle: 'Ainda precisa de ajuda?', contactText: 'Será um prazer ajudar. Analisaremos sua mensagem assim que possível.', includeTitle: 'Inclua estas informações', includeText: 'Modelo do dispositivo<br>Versão do iOS<br>Versão do Rainora<br>O que aconteceu e como reproduzir o problema', footer: '© 2026 Rainora. O Rainora apoia o relaxamento e rotinas melhores; não é um tratamento médico.'
+      }
+    };
+
+    function readLanguage() {
+      const params = new URLSearchParams(window.location.search);
+      const requested = (params.get('lang') || params.get('language') || 'en').toLowerCase();
+      return languages.includes(requested) ? requested : 'en';
+    }
+
+    function getValue(data, path) {
+      return path.split('.').reduce((value, key) => value == null ? '' : value[key], data);
+    }
+
+    function render(language, updateUrl) {
+      const data = copy[language];
+      document.documentElement.lang = data.htmlLang;
+      document.title = data.title;
+      document.querySelectorAll('[data-text]').forEach((element) => {
+        element.textContent = getValue(data, element.dataset.text);
+      });
+      document.querySelectorAll('[data-html]').forEach((element) => {
+        element.innerHTML = getValue(data, element.dataset.html);
+      });
+      document.querySelectorAll('[data-language]').forEach((button) => {
+        button.setAttribute('aria-pressed', String(button.dataset.language === language));
+      });
+      const email = document.getElementById('emailLink');
+      email.href = `mailto:${EMAIL}?subject=${encodeURIComponent(`${data.title} - Support`)}`;
+      if (updateUrl) {
+        const url = new URL(window.location.href);
+        url.searchParams.set('lang', language);
+        window.history.replaceState({}, '', url);
+      }
+    }
+
+    document.querySelectorAll('[data-language]').forEach((button) => {
+      button.addEventListener('click', () => render(button.dataset.language, true));
+    });
+    render(readLanguage(), false);
+  </script>
+</body>
+</html>
